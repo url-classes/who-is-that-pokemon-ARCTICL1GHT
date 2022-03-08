@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 public class frmMain extends javax.swing.JFrame {
     
     Pokemon whoIsThatPokemon; // objeto de la clase que hace match con los datos de la API
+    Pokemon aux=new Pokemon() ;
     Pokedex dexter = new Pokedex();
     PokeViewer visor = new PokeViewer();
     Reloj horaActual = new Reloj();
@@ -196,8 +197,13 @@ public class frmMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(verdad1==true)
         {
+            verdad1=false;
+            verdad3=false;
+            verdad2=false;
+            verdad4=false;
             JOptionPane.showMessageDialog(null, "Haz Acertado", "Felicitaciones", JOptionPane.INFORMATION_MESSAGE);
         }else{
+            
             JOptionPane.showMessageDialog(null, "Parece que te haz confundido", "Ooops", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnPokemon1ActionPerformed
@@ -206,8 +212,13 @@ public class frmMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(verdad2==true)
         {
+            verdad2=false;
+            verdad3=false;
+            verdad4=false;
+            verdad1=false;
             JOptionPane.showMessageDialog(null, "Haz Acertado", "Felicitaciones", JOptionPane.INFORMATION_MESSAGE);
         }else{
+            
             JOptionPane.showMessageDialog(null, "Parece que te haz confundido", "Ooops", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnPokemon2ActionPerformed
@@ -216,8 +227,13 @@ public class frmMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(verdad3==true)
         {
+            verdad3=false;
+            verdad2=false;
+            verdad4=false;
+            verdad1=false;
             JOptionPane.showMessageDialog(null, "Haz Acertado", "Felicitaciones", JOptionPane.INFORMATION_MESSAGE);
         }else{
+            
             JOptionPane.showMessageDialog(null, "Parece que te haz confundido", "Ooops", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnPokemon3ActionPerformed
@@ -225,9 +241,14 @@ public class frmMain extends javax.swing.JFrame {
     private void btnPokemon4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPokemon4ActionPerformed
         // TODO add your handling code here:
         if(verdad4==true)
-        {
+        { 
+            verdad4=false;
+            verdad3=false;
+            verdad2=false;
+            verdad1=false;
             JOptionPane.showMessageDialog(null, "Haz Acertado", "Felicitaciones", JOptionPane.INFORMATION_MESSAGE);
         } else{
+           
             JOptionPane.showMessageDialog(null, "Parece que te haz confundido", "Ooops", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnPokemon4ActionPerformed
@@ -242,6 +263,7 @@ public class frmMain extends javax.swing.JFrame {
         public void run() {
         try {
             whoIsThatPokemon = dexter.buscarPokemon();
+                aux=whoIsThatPokemon;
             int op = (int) Math.floor(Math.random() * 4 + 1);
             System.out.println(op);
             switch (op){
@@ -290,6 +312,8 @@ public class frmMain extends javax.swing.JFrame {
                  btnPokemon1.setText(whoIsThatPokemon.getName());
                 break;
             }
+            
+              whoIsThatPokemon=aux;
              while(true){
                 visor.mostrarSprites();
                 btnJugar.setText("Jugar de nuevo");
