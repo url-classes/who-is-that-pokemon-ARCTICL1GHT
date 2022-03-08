@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,7 +27,8 @@ public class frmMain extends javax.swing.JFrame {
     Pokedex dexter = new Pokedex();
     PokeViewer visor = new PokeViewer();
     Reloj horaActual = new Reloj();
-
+    BuscarPoke busqueda = new BuscarPoke();
+    boolean verdad1=false,verdad2=false,verdad3=false,verdad4=false;
     /**
      * Creates new form frmMain
      */
@@ -91,12 +93,32 @@ public class frmMain extends javax.swing.JFrame {
         lblSprite.setText("?");
 
         btnPokemon1.setText("???");
+        btnPokemon1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPokemon1ActionPerformed(evt);
+            }
+        });
 
         btnPokemon2.setText("???");
+        btnPokemon2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPokemon2ActionPerformed(evt);
+            }
+        });
 
         btnPokemon3.setText("???");
+        btnPokemon3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPokemon3ActionPerformed(evt);
+            }
+        });
 
         btnPokemon4.setText("???");
+        btnPokemon4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPokemon4ActionPerformed(evt);
+            }
+        });
 
         btnJugar.setText("Jugar");
         btnJugar.addActionListener(new java.awt.event.ActionListener() {
@@ -166,19 +188,120 @@ public class frmMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
-        try {
-            whoIsThatPokemon = dexter.buscarPokemon();
-            btnPokemon1.setText(whoIsThatPokemon.getName());
-            btnPokemon2.setText(whoIsThatPokemon.getName());
-            btnPokemon3.setText(whoIsThatPokemon.getName());
-            btnPokemon4.setText(whoIsThatPokemon.getName());
-            visor.mostrarSprites();
-        } catch (IOException | InterruptedException ex) {
-            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        btnJugar.setText("Jugar de nuevo");
+        busqueda= new BuscarPoke();
+        busqueda.start();
     }//GEN-LAST:event_btnJugarActionPerformed
 
+    private void btnPokemon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPokemon1ActionPerformed
+        // TODO add your handling code here:
+        if(verdad1==true)
+        {
+            JOptionPane.showMessageDialog(null, "Haz Acertado", "Felicitaciones", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Parece que te haz confundido", "Ooops", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnPokemon1ActionPerformed
+
+    private void btnPokemon2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPokemon2ActionPerformed
+        // TODO add your handling code here:
+        if(verdad2==true)
+        {
+            JOptionPane.showMessageDialog(null, "Haz Acertado", "Felicitaciones", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Parece que te haz confundido", "Ooops", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnPokemon2ActionPerformed
+
+    private void btnPokemon3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPokemon3ActionPerformed
+        // TODO add your handling code here:
+        if(verdad3==true)
+        {
+            JOptionPane.showMessageDialog(null, "Haz Acertado", "Felicitaciones", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Parece que te haz confundido", "Ooops", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnPokemon3ActionPerformed
+
+    private void btnPokemon4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPokemon4ActionPerformed
+        // TODO add your handling code here:
+        if(verdad4==true)
+        {
+            JOptionPane.showMessageDialog(null, "Haz Acertado", "Felicitaciones", JOptionPane.INFORMATION_MESSAGE);
+        } else{
+            JOptionPane.showMessageDialog(null, "Parece que te haz confundido", "Ooops", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnPokemon4ActionPerformed
+
+    public class BuscarPoke extends Thread {
+        
+        String nombre1="";
+        String nombre2="";
+        String nombre3="";
+        String nombre4="";
+    @Override
+        public void run() {
+        try {
+            whoIsThatPokemon = dexter.buscarPokemon();
+            int op = (int) Math.floor(Math.random() * 4 + 1);
+            System.out.println(op);
+            switch (op){
+                case 1:
+                btnPokemon1.setText(whoIsThatPokemon.getName());
+                verdad1=true;
+                nombre1=whoIsThatPokemon.getName();
+                whoIsThatPokemon = dexter.buscarPokemon();
+                 btnPokemon2.setText(whoIsThatPokemon.getName());
+                whoIsThatPokemon = dexter.buscarPokemon();
+                 btnPokemon3.setText(whoIsThatPokemon.getName());
+                whoIsThatPokemon = dexter.buscarPokemon();
+                 btnPokemon4.setText(whoIsThatPokemon.getName());
+                break;
+                case 2:
+                btnPokemon2.setText(whoIsThatPokemon.getName());
+                verdad2=true;
+                nombre2=whoIsThatPokemon.getName();
+                whoIsThatPokemon = dexter.buscarPokemon();
+                 btnPokemon1.setText(whoIsThatPokemon.getName());
+                whoIsThatPokemon = dexter.buscarPokemon();
+                 btnPokemon3.setText(whoIsThatPokemon.getName());
+                whoIsThatPokemon = dexter.buscarPokemon();
+                 btnPokemon4.setText(whoIsThatPokemon.getName());
+                break;
+                case 3:
+                btnPokemon3.setText(whoIsThatPokemon.getName());
+                verdad3=true;
+                nombre3=whoIsThatPokemon.getName();
+                whoIsThatPokemon = dexter.buscarPokemon();
+                 btnPokemon2.setText(whoIsThatPokemon.getName());
+                whoIsThatPokemon = dexter.buscarPokemon();
+                 btnPokemon1.setText(whoIsThatPokemon.getName());
+                whoIsThatPokemon = dexter.buscarPokemon();
+                 btnPokemon4.setText(whoIsThatPokemon.getName());
+                break;
+                case 4:
+                btnPokemon4.setText(whoIsThatPokemon.getName());
+                verdad4=true;
+                nombre4=whoIsThatPokemon.getName();
+                whoIsThatPokemon = dexter.buscarPokemon();
+                 btnPokemon2.setText(whoIsThatPokemon.getName());
+                whoIsThatPokemon = dexter.buscarPokemon();
+                 btnPokemon3.setText(whoIsThatPokemon.getName());
+                whoIsThatPokemon = dexter.buscarPokemon();
+                 btnPokemon1.setText(whoIsThatPokemon.getName());
+                break;
+            }
+             while(true){
+                visor.mostrarSprites();
+                btnJugar.setText("Jugar de nuevo");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+     
+    }
     /**
      * @param args the command line arguments
      */
@@ -205,7 +328,6 @@ public class frmMain extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(frmMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
